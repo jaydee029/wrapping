@@ -23,7 +23,6 @@ jobs:
             
             - name: Signing and Building artefacts
               run: |
-               mvn clean package 
-               mvn --batch-mode deploy -Dgpg.passphrase=${{secrets.MAVEN_GPG_PASSPHRASE}} -Dgalasa.source.repo=https://repo.maven.apache.org/maven2/ -Dgalasa.central.repo=https://repo.maven.apache.org/maven2/ -Dgalasa.release.repo=https://github.com/jaydee029/wrapping/repo
+               mvn clean install -Dgpg.skip=true  -Dgalasa.source.repo=https://repo.maven.apache.org/maven2/ -Dgalasa.central.repo=https://repo.maven.apache.org/maven2/ -Dgalasa.release.repo=https://maven.pkg.github.com/jaydee029/wrapping
 
 
