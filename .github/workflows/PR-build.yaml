@@ -21,8 +21,11 @@ jobs:
                 distribution: 'temurin'
                 cache: maven
             
-            - name: Signing and Building artefacts
+            - name: Building artefacts
               run: |
-               mvn clean install -Dgpg.skip=true  -Dgalasa.source.repo=https://repo.maven.apache.org/maven2/ -Dgalasa.central.repo=https://repo.maven.apache.org/maven2/ -Dgalasa.release.repo=https://maven.pkg.github.com/jaydee029/wrapping
+               mvn clean install -Dgpg.skip=true \
+               -Dgalasa.source.repo=https://repo.maven.apache.org/maven2/ \
+               -Dgalasa.central.repo=https://repo.maven.apache.org/maven2/ \
+               -Dgalasa.release.repo=https://maven.pkg.github.com/jaydee029/wrapping
 
 
