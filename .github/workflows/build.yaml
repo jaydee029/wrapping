@@ -29,7 +29,7 @@ jobs:
           - name: Building artefacts
             run: |
              cat ~/.m2/settings.xml
-             mvn clean deploy -Dgalasa.source.repo=https://repo.maven.apache.org/maven2/ \
+             mvn --batch-mode -Dgpg.passphrase=${{secrets.GPG_PASSPHRASE}} clean deploy -Dgalasa.source.repo=https://repo.maven.apache.org/maven2/ \
              -Dgalasa.central.repo=https://repo.maven.apache.org/maven2/   \
              -Dgalasa.release.repo=https://maven.pkg.github.com/jaydee029/wrapping        \
              -Dgalasa.jacocoEnabled=true -Dgalasa.isRelease=false
