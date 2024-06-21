@@ -28,6 +28,7 @@ jobs:
           
           - name: Building artefacts
             run: |
+             cat ~/.m2/settings.xml
              mvn clean deploy \
              -Dgalasa.source.repo=https://repo.maven.apache.org/maven2/ \
              -Dgalasa.central.repo=https://repo.maven.apache.org/maven2/ \
