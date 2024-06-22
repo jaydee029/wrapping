@@ -26,6 +26,13 @@ jobs:
               gpg-passphrase: ${{secrets.GPG_PASSPHRASE}}
               cache: maven
           
+          - name: Check if secret exists
+            run: |
+                if [[ -z "${{ secrets.GPG_PRIVATE_KEY }}" ]]; then
+                  echo "Secret does not exist"
+                else
+                  echo "Secret exists"
+
           - name: Building artefacts
             run: |
              cat ~/.gnupg/gpg.conf
