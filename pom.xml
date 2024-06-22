@@ -55,7 +55,7 @@
             <url>https://maven.pkg.github.com/jaydee029/wrapping</url>
 		</repository>
 		<snapshotRepository>
-			  <id>github</id>
+			<id>github</id>
             <name>GitHub jaydee029 Apache Maven Packages</name>
             <url>https://maven.pkg.github.com/jaydee029/wrapping</url>
 		</snapshotRepository>
