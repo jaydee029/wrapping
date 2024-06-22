@@ -4,6 +4,9 @@ on:
     workflow_dispatch:
     pull_request:
         branches: [main]
+env:
+  GPG_PASSPHRASE: ${{secrets.GPG_PASSPHRASE}}
+  GPG_PRIVATE_KEY: ${{secrets.GPG_PRIVATE_KEY}}
 
 jobs:
     build-push-wrapping-artefacts:
@@ -19,11 +22,8 @@ jobs:
             with:
               java-version: '11'
               distribution: 'temurin'
-              server-id: 'github'
-              server-username: ${{github.actor}}
-              server-password: ${{ github.token}}
-              gpg-private-key: ${{secrets.GPG_PRIVATE_KEY}}
-              gpg-passphrase: ${{secrets.GPG_PASSPHRASE}}
+              gpg-private-key: GPG_PRIVATE_KEY
+              gpg-passphrase: GPG_PASSPHRASE
               cache: maven
 
           - name: Building artefacts
