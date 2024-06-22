@@ -26,12 +26,12 @@ jobs:
               gpg-passphrase: ${{secrets.GPG_PASSPHRASE}}
               cache: maven
 
-          - name: Import GPG Key
-            uses: crazy-max/ghaction-import-gpg@v1
-            env:
-               GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
-               PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
-
+          - name: Import GPG key
+            uses: crazy-max/ghaction-import-gpg@v6
+            with:
+               gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+               passphrase: ${{ secrets.GPG_PASSPHRASE }}
+  
           - name: Building artefacts
             run: |
              mvn --batch-mode -Dgpg.passphrase=${{secrets.GPG_PASSPHRASE}} clean deploy -Dgalasa.source.repo=https://repo.maven.apache.org/maven2/ \
