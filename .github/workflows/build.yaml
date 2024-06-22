@@ -22,7 +22,7 @@ jobs:
             with:
               java-version: '11'
               distribution: 'temurin'
-              gpg-private-key: GPG_PRIVATE_KEY
+              gpg-private-key: ${{secrets.GPG_PRIVATE_KEY}}
               gpg-passphrase: GPG_PASSPHRASE
               cache: maven
 
@@ -33,4 +33,6 @@ jobs:
              -Dgalasa.central.repo=https://repo.maven.apache.org/maven2/   \
              -Dgalasa.release.repo=https://maven.pkg.github.com/jaydee029/wrapping        \
              -Dgalasa.jacocoEnabled=true -Dgalasa.isRelease=false
-            
+            env:
+              GPG_PASSPHRASE: ${{secrets.GPG_PASSPHRASE}}
+    
