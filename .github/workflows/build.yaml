@@ -26,11 +26,12 @@ jobs:
               gpg-passphrase: ${{secrets.GPG_PASSPHRASE}}
               cache: maven
 
-          - name: Configure GPG Key
+          - name: Import GPG Key
             run: |
-              echo -n "$GPG_SIGNING_KEY" | gpg --import
-            env:
-              GPG_SIGNING_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+              echo "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --batch --import
+              echo "default-key $(gpg --list-keys --with-colons | grep pub | cut -d: -f5)" >~/.gnupg/gpg.conf
+              echo 'pinentry-mode loopback' >>~/.gnupg/gpg.conf
+              gpg --list-secret-keys --keyid-format LONG
   
           - name: Building artefacts
             run: |
