@@ -22,10 +22,15 @@ jobs:
               server-id: 'github'
               server-username: ${{github.actor}}
               server-password: ${{ github.token}}
-              gpg-private-key: GPG_SECRET
+              gpg-private-key: ${{secrets.GPG_PRIVATE_KEY}}
               gpg-passphrase: ${{secrets.GPG_PASSPHRASE}}
               cache: maven
-  
+
+          - name: Import GPG Key
+            uses: crazy-max/ghaction-import-gpg@v1
+            env:
+               GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+               PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
 
           - name: Building artefacts
             run: |
@@ -34,6 +39,4 @@ jobs:
              -Dgalasa.release.repo=https://maven.pkg.github.com/jaydee029/wrapping        \
              -Dgalasa.jacocoEnabled=true -Dgalasa.isRelease=false
             
-            env:
-              GPG_SECRET: ${{secrets.GPG_PRIVATE_KEY}}
 
