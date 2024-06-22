@@ -22,21 +22,18 @@ jobs:
               server-id: 'github'
               server-username: ${{github.actor}}
               server-password: ${{ github.token}}
-              gpg-private-key: ${{secrets.GPG_PRIVATE_KEY}}
+              gpg-private-key: GPG_SECRET
               gpg-passphrase: ${{secrets.GPG_PASSPHRASE}}
               cache: maven
-          
-          - name: Check if secret exists
-            run: |
-                if [[ -z "${{ secrets.GPG_PRIVATE_KEY }}" ]]; then
-                  echo "Secret does not exist"
-                else
-                  echo "Secret exists"
+  
 
           - name: Building artefacts
             run: |
-             cat ~/.gnupg/gpg.conf
              mvn --batch-mode -Dgpg.passphrase=${{secrets.GPG_PASSPHRASE}} clean deploy -Dgalasa.source.repo=https://repo.maven.apache.org/maven2/ \
              -Dgalasa.central.repo=https://repo.maven.apache.org/maven2/   \
              -Dgalasa.release.repo=https://maven.pkg.github.com/jaydee029/wrapping        \
              -Dgalasa.jacocoEnabled=true -Dgalasa.isRelease=false
+            
+            env:
+              GPG_SECRET: ${{secrets.GPG_PRIVATE_KEY}}
+
