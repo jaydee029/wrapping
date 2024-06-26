@@ -25,14 +25,14 @@ jobs:
               gpg-private-key: ${{secrets.GPG_PRIVATE_KEY}}
               gpg-passphrase: GPG_PASSPHRASE
               cache: maven
-
+              
           - name: Building artefacts
             run: |
              cat ~/.m2/settings.xml
-             mvn --batch-mode -Dgpg.passphrase=${{secrets.GPG_PASSPHRASE}} clean deploy -Dgalasa.source.repo=https://repo.maven.apache.org/maven2/ \
+             mvn --batch-mode --errors --fail-at-end deploy -Dgpg.passphrase=${{secrets.GPG_PASSPHRASE}} -Dgalasa.source.repo=https://repo.maven.apache.org/maven2/ \
              -Dgalasa.central.repo=https://repo.maven.apache.org/maven2/   \
              -Dgalasa.release.repo=https://maven.pkg.github.com/jaydee029/wrapping        \
-             -Dgalasa.jacocoEnabled=true -Dgalasa.isRelease=false
-            env:
-              GPG_PASSPHRASE: ${{secrets.GPG_PASSPHRASE}}
+             -Dgalasa.jacocoEnabled=true -Dgalasa.isRelease=true \
+             -s ~/.m2/settings.xml
+      
     
