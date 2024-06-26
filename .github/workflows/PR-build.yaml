@@ -26,6 +26,6 @@ jobs:
                mvn deploy -Dgpg.skip=true \
                -Dgalasa.source.repo=https://repo.maven.apache.org/maven2/ \
                -Dgalasa.central.repo=https://repo.maven.apache.org/maven2/ \
-               -Dgalasa.release.repo=https://maven.pkg.github.com/jaydee029/wrapping
+               -Dgalasa.release.repo=file:${{ github.workspace }}/wrapping/repo
 
 
