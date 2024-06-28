@@ -28,8 +28,6 @@ jobs:
 
           - name: Building artefacts
             run: |
-             gpg --version
-             cat ~/.m2/settings.xml
              mvn --batch-mode --errors --fail-at-end deploy -s ~/.m2/settings.xml -Dgpg.passphrase=${{secrets.GPG_PASSPHRASE}} -Dgalasa.source.repo=https://repo.maven.apache.org/maven2/ \
              -Dgalasa.central.repo=https://repo.maven.apache.org/maven2/   \
              -Dgalasa.release.repo=https://maven.pkg.github.com/jaydee029/wrapping        \
