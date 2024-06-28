@@ -50,12 +50,14 @@
 
 	<distributionManagement>
 		<repository>
-			<id>galasa.release.repo</id>
-			<url>${galasa.release.repo}</url>
+			<id>github</id>
+            <name>GitHub jaydee029 Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/jaydee029/wrapping</url>
 		</repository>
 		<snapshotRepository>
-			<id>galasa.snapshot.repo</id>
-			<url>${galasa.snapshot.repo}</url>
+			<id>github</id>
+            <name>GitHub jaydee029 Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/jaydee029/wrapping</url>
 		</snapshotRepository>
 	</distributionManagement>
 
