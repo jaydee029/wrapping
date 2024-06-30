@@ -37,9 +37,11 @@ jobs:
               GITHUB_ACTOR: ${{github.actor}}
               GITHUB_TOKEN: ${{github.token}}
             run: |
-             mvn -X --batch-mode -Dgpg.passphrase=GPG_PASSPHRASE deploy -Dgalasa.source.repo=https://repo.maven.apache.org/maven2/ \
+             mvn -X --batch-mode -Dgpg.passphrase=GPG_PASSPHRASE deploy \
+             -Dgpg.keyname=jaydee029
+             -Dgalasa.source.repo=https://repo.maven.apache.org/maven2/ \
              -Dgalasa.central.repo=https://repo.maven.apache.org/maven2/   \
              -Dgalasa.release.repo=https://maven.pkg.github.com/jaydee029/wrapping        \
-             -Dgalasa.jacocoEnabled=true -Dgalasa.isRelease=true
+             -Dgalasa.jacocoEnabled=true -Dgalasa.isRelease=true 
             
     
