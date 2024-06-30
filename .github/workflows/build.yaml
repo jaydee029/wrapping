@@ -22,6 +22,10 @@ jobs:
             with:
               java-version: '11'
               distribution: 'temurin'
+              server-id: 'github'
+              server-username: GITHUB_ACTOR
+              server-password: GITHUB_TOKEN
+              settings-path: '~/.m2'
               gpg-private-key: ${{secrets.GPG_PRIVATE_KEY}}
               gpg-passphrase: GPG_PASSPHRASE
               cache: maven
@@ -30,9 +34,10 @@ jobs:
             env:
               GPG_PASSPHRASE: ${{secrets.GPG_PASSPHRASE}}
               GPG_PRIVATE_KEY: ${{secrets.GPG_PRIVATE_KEY}}
+              GITHUB_ACTOR: ${{github.actor}}
+              GITHUB_TOKEN: ${{github.token}}
             run: |
-             gpg --list-keys
-             mvn -X -s ~/.m2/settings.xml --batch-mode -Dgpg.passphrase=GPG_PASSPHRASE deploy -Dgalasa.source.repo=https://repo.maven.apache.org/maven2/ \
+             mvn -X --batch-mode -Dgpg.passphrase=GPG_PASSPHRASE deploy -Dgalasa.source.repo=https://repo.maven.apache.org/maven2/ \
              -Dgalasa.central.repo=https://repo.maven.apache.org/maven2/   \
              -Dgalasa.release.repo=https://maven.pkg.github.com/jaydee029/wrapping        \
              -Dgalasa.jacocoEnabled=true -Dgalasa.isRelease=true
