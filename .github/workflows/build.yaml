@@ -31,8 +31,8 @@ jobs:
               GPG_PASSPHRASE: ${{secrets.GPG_PASSPHRASE}}
               GPG_PRIVATE_KEY: ${{secrets.GPG_PRIVATE_KEY}}
             run: |
-             gpg -K
-             mvn -X -s /.m2/settings.xml --batch-mode -Dgpg.passphrase=GPG_PASSPHRASE deploy -Dgalasa.source.repo=https://repo.maven.apache.org/maven2/ \
+             gpg --list-keys
+             mvn -X -s ~/.m2/settings.xml --batch-mode -Dgpg.passphrase=GPG_PASSPHRASE deploy -Dgalasa.source.repo=https://repo.maven.apache.org/maven2/ \
              -Dgalasa.central.repo=https://repo.maven.apache.org/maven2/   \
              -Dgalasa.release.repo=https://maven.pkg.github.com/jaydee029/wrapping        \
              -Dgalasa.jacocoEnabled=true -Dgalasa.isRelease=true
