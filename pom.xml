@@ -105,10 +105,6 @@
 						</goals>
 						<configuration>
 						    <defaultKeyring>false</defaultKeyring>
-							<gpgArguments>
-								<arg>--pinentry-mode</arg>
-								<arg>loopback</arg>
-							</gpgArguments>
 						</configuration>
 					</execution>
 				</executions>
