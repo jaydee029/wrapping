@@ -18,10 +18,7 @@ jobs:
       with:
         java-version: '11'
         distribution: 'semeru'
-
-    - name: Build with Maven
-      run: mvn clean install
-
+    
     - name: Set up GPG
       env:
         GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
@@ -29,6 +26,9 @@ jobs:
       run: |
         echo "$GPG_PRIVATE_KEY" | gpg --batch --import
         echo "$GPG_PASSPHRASE" | gpg --batch --passphrase-fd 0 --pinentry-mode loopback
+  
+    - name: Build with Maven
+      run: mvn clean install
 
     - name: Sign the artifacts
       run: |
