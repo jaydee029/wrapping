@@ -37,7 +37,7 @@ jobs:
               GITHUB_ACTOR: ${{github.actor}}
               GITHUB_TOKEN: ${{github.token}}
             run: |
-             cat default-key 101BE0CCD234B901 > ~/.gnupg/gpg.conf
+             echo "default-key 101BE0CCD234B901" | cat >> ~/.gnupg/gpg.conf
              mvn -X --batch-mode -Dgpg.passphrase=GPG_PASSPHRASE deploy \
              -Dgpg.keyname=5C4B70422EB15ECB6980AD03101BE0CCD234B901 \
              -Dgpg.homedir=/home/runner/.gnupg
