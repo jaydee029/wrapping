@@ -39,7 +39,7 @@ jobs:
             run: |
              mvn -X --batch-mode -Dgpg.passphrase=GPG_PASSPHRASE deploy \
              -Dgpg.keyname=5C4B70422EB15ECB6980AD03101BE0CCD234B901 \
-             -Dgpg.homedir=~/.gnupg
+             -Dgpg.homedir=/home/runner/.gnupg
              -Dgalasa.source.repo=https://repo.maven.apache.org/maven2/ \
              -Dgalasa.central.repo=https://repo.maven.apache.org/maven2/   \
              -Dgalasa.release.repo=https://maven.pkg.github.com/jaydee029/wrapping        \
