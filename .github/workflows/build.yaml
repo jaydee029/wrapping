@@ -8,6 +8,7 @@ env:
   GPG_PASSPHRASE: ${{secrets.GPG_PASSPHRASE}}
   GPG_PRIVATE_KEY: ${{secrets.GPG_PRIVATE_KEY}}
 
+
 jobs:
     build-push-wrapping-artefacts:
         name: Building and Deploying Maven artefcats
@@ -25,7 +26,6 @@ jobs:
               server-id: 'github'
               server-username: GITHUB_ACTOR
               server-password: GITHUB_TOKEN
-              settings-path: '~/.m2'
               gpg-private-key: ${{secrets.GPG_PRIVATE_KEY}}
               gpg-passphrase: GPG_PASSPHRASE
               cache: maven
@@ -37,6 +37,7 @@ jobs:
               GITHUB_ACTOR: ${{github.actor}}
               GITHUB_TOKEN: ${{github.token}}
             run: |
+             cat default-key 101BE0CCD234B901 > ~/.gnupg/gpg.conf
              mvn -X --batch-mode -Dgpg.passphrase=GPG_PASSPHRASE deploy \
              -Dgpg.keyname=5C4B70422EB15ECB6980AD03101BE0CCD234B901 \
              -Dgpg.homedir=/home/runner/.gnupg
