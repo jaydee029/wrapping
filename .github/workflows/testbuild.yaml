@@ -1,0 +1,44 @@
+name: Build, Sign, and Push to GitHub Maven Package
+
+on:
+    workflow_dispatch:
+    pull_request:
+        branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up JDK 11
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+        distribution: 'semeru'
+
+    - name: Build with Maven
+      run: mvn clean install
+
+    - name: Set up GPG
+      env:
+        GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+        GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+      run: |
+        echo "$GPG_PRIVATE_KEY" | gpg --batch --import
+        echo "$GPG_PASSPHRASE" | gpg --batch --passphrase-fd 0 --pinentry-mode loopback
+
+    - name: Sign the artifacts
+      run: |
+        mvn gpg:sign
+        -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }} 
+
+    - name: Publish to GitHub Packages
+      run: mvn deploy -s settings.xml
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Notify Success
+      run: echo "Artifact has been built, signed, and pushed to GitHub Maven Package"
